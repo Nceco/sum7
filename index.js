@@ -3,6 +3,9 @@ const userRouter = require("./routers/userRouter");
 
 const app = express();
 
+app.use(express.urlencoded({ extended: true })); // 解析post请求
+app.use(express.json());
+
 // 注册路由
 
 // user路由

@@ -10,14 +10,14 @@ const pool = mysql.createPool({
 
 class MySql {
   constructor() {}
-  query(sql) {
+  query(sql, ...ret) {
     return new Promise((resolve, reject) => {
       pool.getConnection((err, connection) => {
         if (err) {
           reject(err);
           throw err;
         }
-        connection.query(sql, (err, results, fields) => {
+        connection.query(sql, ...ret, (err, results, fields) => {
           if (err) {
             reject(err);
             throw err;
