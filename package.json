@@ -1,0 +1,9 @@
+{
+  "name": "sum-server",
+  "version": "1.0.0",
+  "description": "web server",
+  "main": "index.js",
+  "repository": "https://github.com/Nceco/smu7.git",
+  "author": "tangcong",
+  "license": "MIT"
+}
