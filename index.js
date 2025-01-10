@@ -3,6 +3,7 @@ const middleware = require("./middleware/index");
 const loginRouter = require("./routers/LoginRouter");
 const userRouter = require("./routers/UserRouter");
 const registerRouter = require("./routers/RegisterRouter");
+const pwdRouter = require("./routers/PwdRouter");
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(middleware.checkToken);
 
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
+app.use("/modifyPwd", pwdRouter);
 app.use("/user", userRouter);
 
 // 错误中间件
