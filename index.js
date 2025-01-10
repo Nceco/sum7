@@ -1,4 +1,5 @@
 const express = require("express");
+const middleware = require("./middleware/index");
 const loginRouter = require("./routers/LoginRouter");
 const userRouter = require("./routers/UserRouter");
 
@@ -7,6 +8,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true })); // 解析post请求
 app.use(express.json());
 
+app.use(middleware.checkToken);
 // 注册路由
 
 // user路由

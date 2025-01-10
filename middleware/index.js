@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+const common = require("../common/index");
 const checkIdIsNull = (req, res, next) => {
   const id = req.params.id || req.body.id;
   if (!id) {
@@ -22,7 +24,34 @@ const checkNameAndPwd = (req, res, next) => {
   }
 };
 
+const checkToken = (req, res, next) => {
+  // 过滤不需要登录验证的接口
+  if (common.WHITE_LIST.includes(req.url)) {
+    return next();
+  }
+  const token = req.headers["authorization"];
+  if (!token) {
+    res.status(401).send({
+      code: 401,
+      message: "Unauthorized",
+    });
+  } else {
+    jwt.verify(token, common.JWT_SECRET, (err, decoded) => {
+      if (err) {
+        res.status(401).send({
+          code: 401,
+          message: "Unauthorized",
+        });
+      } else {
+        // req.user = decoded;
+        next();
+      }
+    });
+  }
+};
+
 module.exports = {
   checkIdIsNull,
   checkNameAndPwd,
+  checkToken,
 };
