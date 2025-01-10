@@ -2,6 +2,7 @@ const express = require("express");
 const middleware = require("./middleware/index");
 const loginRouter = require("./routers/LoginRouter");
 const userRouter = require("./routers/UserRouter");
+const registerRouter = require("./routers/RegisterRouter");
 
 const app = express();
 
@@ -11,8 +12,8 @@ app.use(express.json());
 app.use(middleware.checkToken);
 // 注册路由
 
-// user路由
 app.use("/login", loginRouter);
+app.use("/register", registerRouter);
 app.use("/user", userRouter);
 
 // 错误中间件

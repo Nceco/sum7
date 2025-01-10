@@ -50,8 +50,21 @@ const checkToken = (req, res, next) => {
   }
 };
 
+const checkPwdLength = (req, res, next) => {
+  const { password } = req.body;
+  if (password.length < 8) {
+    res.status(400).send({
+      code: 400,
+      message: "password length must be at least 6",
+    });
+  } else {
+    next();
+  }
+};
+
 module.exports = {
   checkIdIsNull,
   checkNameAndPwd,
   checkToken,
+  checkPwdLength,
 };
