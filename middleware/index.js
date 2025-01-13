@@ -35,6 +35,13 @@ const checkToken = (req, res, next) => {
     return next();
   }
   const token = req.headers["authorization"];
+  const token_index = common.BLACK_LIST_TOKENS.indexOf(token);
+  if (token_index < 0) {
+    return res.status(401).send({
+      code: 401,
+      message: "Unauthorized",
+    });
+  }
   if (!token) {
     res.status(401).send({
       code: 401,
@@ -47,6 +54,7 @@ const checkToken = (req, res, next) => {
           code: 401,
           message: "Unauthorized",
         });
+        common.BLACK_LIST_TOKENS.splice(token_index, 1);
       } else {
         // req.user = decoded;
         next();

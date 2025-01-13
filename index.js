@@ -6,6 +6,7 @@ const userRoute = require("./routes/UserRoute");
 const registerRoute = require("./routes/RegisterRoute");
 const pwdRoute = require("./routes/PwdRoute");
 const captchaRoute = require("./routes/CaptchaRoute");
+const logoutRoute = require("./routes/LogoutRoute");
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(middleware.checkToken);
 
 app.use("/login", loginRoute);
 app.use("/captcha", captchaRoute);
+app.use("/logout", logoutRoute);
 app.use("/register", registerRoute);
 app.use("/modifyPwd", pwdRoute);
 app.use("/user", userRoute);

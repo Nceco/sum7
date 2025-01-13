@@ -22,14 +22,16 @@ const login = async (req, res) => {
           user[0].password,
         ]);
         if (ret.length > 0) {
+          const token = jwt.sign({ id: ret[0].id }, common.JWT_SECRET, {
+            expiresIn: 60 * 60 * 24,
+          });
+          common.BLACK_LIST_TOKENS.push(token);
           res.send({
             code: 200,
             message: "登录成功",
             data: {
               ...ret[0],
-              token: jwt.sign({ id: ret[0].id }, common.JWT_SECRET, {
-                expiresIn: 60 * 60 * 24,
-              }),
+              token,
             },
           });
         } else {
