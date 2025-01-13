@@ -25,7 +25,7 @@ const login = async (req, res) => {
           const token = jwt.sign({ id: ret[0].id }, common.JWT_SECRET, {
             expiresIn: 60 * 60 * 24,
           });
-          common.BLACK_LIST_TOKENS.push(token);
+          common.USER_TOKENS_LIST.push(token);
           res.send({
             code: 200,
             message: "登录成功",
