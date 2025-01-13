@@ -9,7 +9,7 @@ const login = async (req, res) => {
   try {
     if (captcha !== req.session.captcha) {
       return res.send({
-        code: 200,
+        code: 300,
         message: "验证码错误",
       });
     }
