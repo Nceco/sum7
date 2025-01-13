@@ -5,8 +5,14 @@ const loginService = require("../service/LoginService");
 const common = require("../common/index");
 
 const login = async (req, res) => {
-  const { name, password } = req.body;
+  const { name, password, captcha } = req.body;
   try {
+    if (captcha !== req.session.captcha) {
+      return res.send({
+        code: 200,
+        message: "验证码错误",
+      });
+    }
     const user = await db.query(loginService.userNameExit, [name]);
     if (user.length > 0) {
       const isPwdCorrect = await bcryptjs.compare(password, user[0].password);

@@ -1,5 +1,5 @@
 const JWT_SECRET = "7mu_12";
-const WHITE_LIST = ["/login", "/register"];
+const WHITE_LIST = ["/login", "/register", "/captcha"];
 module.exports = {
   JWT_SECRET,
   WHITE_LIST,
