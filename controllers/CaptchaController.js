@@ -11,6 +11,8 @@ const captcha = async (req, res) => {
       background: "#f5f5f5", // 背景颜色
     });
     req.session.captcha = captcha.text;
+    // 设置过期时间60秒
+    req.session.cookie.maxAge = 60000;
     res.send({
       code: 200,
       data: {
